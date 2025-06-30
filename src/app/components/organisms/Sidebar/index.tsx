@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 const Sidebar = () => {
-  const userRole = 'admin'; // Simula el rol
+  const userRole = 'admin'; // Simula el rol mientras no este la base de datso
 
   return (
     <div>
