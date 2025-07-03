@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/organisms/Sidebar";
+import Sidebar from "../../../components/organisms/Sidebar/index";
 
 export default function DashboardHome() {
     return (

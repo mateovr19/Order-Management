@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 */
-import Sidebar from '@/app/components/organisms/Sidebar';
+import Sidebar from '@/components/organisms/Sidebar';
 
 export default function DashboardLayout({
   children,
