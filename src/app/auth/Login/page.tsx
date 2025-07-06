@@ -13,7 +13,7 @@ export default function Login() {
             <SignIn />
             <Flex justify="between" my="4">
             <Text>
-              Don't have an Account?
+              Don&apos;t have an Account?
             </Text>
             <Link asChild>
               <NavLink href="/auth/Register" passHref>Sign Up</NavLink>

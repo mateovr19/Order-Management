@@ -3,18 +3,180 @@
 
 generator client {
   provider = "prisma-client-js"
+  // output   = "/app/generated/prisma-client"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name String
-  email String @unique
-  password String
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String @unique
+  password  String
+  role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdMasters Master[]      @relation("CreatedBy")
+  transactions   Transaction[] @relation("ResponsibleFor")
+  createdOrders  Order[]       @relation("CreatedBy")
+  payments       Payment[]
+  receipts       Receipt[]
+
+  @@map("clients")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model Master {
+  id        String   @id @default(cuid())
+  name      String
+  balance   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  creatorId    String
+  creator      Client        @relation("CreatedBy", fields: [creatorId], references: [id])
+  transactions Transaction[]
+  orderItems   OrderItem[]
+
+  @@map("masters")
+}
+
+model Transaction {
+  id       String          @id @default(cuid())
+  date     DateTime        @default(now())
+  quantity Int
+  type     typeTransaction
+
+  masterId String
+  master   Master @relation(fields: [masterId], references: [id], onDelete: Cascade)
+
+  responsibleId String
+  responsible   Client @relation("ResponsibleFor", fields: [responsibleId], references: [id])
+
+  @@map("transactions")
+}
+
+enum typeTransaction {
+  Entrada
+  Salida
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  status    OrderStatus
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  total     Float
+
+  creatorId String
+  creator   Client      @relation("CreatedBy", fields: [creatorId], references: [id])
+  items     OrderItem[]
+  payments  Payment[]
+  receipt   Receipt? //opciional, puede no tener recibo
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  Pendiente
+  Completado
+  Cancelado
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  quantity  Int
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Master @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  receiptId String?
+  receipt   Receipt? @relation(fields: [receiptId], references: [id])
+
+  @@map("order_items")
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  type      PaymentType
+  status    PaymentStatus @default(Pendiente)
+  amount    Float
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id])
+
+  DATA DataPayment?
+
+  @@map("payments")
+}
+
+enum PaymentType {
+  Efectivo
+  Tarjeta_credito
+  Tarjeta_debito
+  Transferencia
+}
+
+enum PaymentStatus {
+  Pendiente
+  Completado
+  Fallido
+  Cancelado
+}
+
+model Receipt {
+  id        String   @id @default(cuid())
+  total     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orderId String @unique // Un recibo está asociado a una sola orden
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id])
+
+  items OrderItem[]
+
+  @@map("receipts")
+}
+
+model DataPayment {
+  id        String   @id @default(cuid())
+  response  Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  idPayment String  @unique
+  payment   Payment @relation(fields: [idPayment], references: [id])
+
+  @@map("data_payments")
 }
