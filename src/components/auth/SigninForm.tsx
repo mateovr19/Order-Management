@@ -41,6 +41,7 @@ export default function SigninForm() {
           render={({field}) => {
             return (
               <TextField.Root 
+                id='email'
                 type='email' 
                 placeholder='email@domain.com'
                 { ... field }
@@ -69,7 +70,7 @@ export default function SigninForm() {
             }
           }}
           render={({ field }) => (
-            <TextField.Root type="password" placeholder="********" {...field}>
+            <TextField.Root id= 'password' type="password" placeholder="********" {...field}>
               <TextField.Slot>
                 <LockClosedIcon height="16" width="16" />
               </TextField.Slot>
