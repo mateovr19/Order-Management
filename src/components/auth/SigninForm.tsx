@@ -4,7 +4,6 @@ import { Flex, TextField, Button, Text } from '@radix-ui/themes';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { useForm, Controller } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 
 export default function SigninForm() {
   const { 
