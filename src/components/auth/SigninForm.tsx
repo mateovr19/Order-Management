@@ -17,18 +17,14 @@ export default function SigninForm() {
       password:""
     }
   });
-  const router = useRouter();
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
-    const res = await signIn('credentials', {
-      redirect: false,
+    await signIn('credentials', {
+      redirect: true,
       email: data.email,
-      password: data.password
+      password: data.password,
+      callbackUrl: "/dashboard"
     })
-    if (!res?.ok) {
-      console.log(res)
-    }
-    router.push("/dashboard");
   })
   return (
     <form onSubmit={onSubmit}>
