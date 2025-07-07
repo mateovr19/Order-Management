@@ -18,19 +18,12 @@ export default function SigninForm() {
   });
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
-    const result = await signIn('credentials', {
-      redirect: false,
+    await signIn('credentials', {
+      redirect: true,
       email: data.email,
       password: data.password,
       callbackUrl: `${window.location.origin}/dashboard`
     })
-    console.log(result);
-    if (result?.ok && result.url) {
-      window.location.href = result.url;
-    } else if (result?.error) {
-      // Muestra un mensaje de error
-      alert("Credenciales incorrectas");
-    }
   })
   return (
     <form onSubmit={onSubmit}>
