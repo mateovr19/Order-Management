@@ -22,8 +22,9 @@ export default function SigninForm() {
       redirect: false,
       email: data.email,
       password: data.password,
-      callbackUrl: "/dashboard"
+      callbackUrl: `${window.location.origin}/dashboard`
     })
+    console.log(result);
     if (result?.ok && result.url) {
       window.location.href = result.url;
     } else if (result?.error) {
