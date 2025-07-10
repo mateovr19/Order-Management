@@ -4,12 +4,11 @@ import { getToken } from 'next-auth/jwt';
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-  const isAuthPage = req.nextUrl.pathname.startsWith('/auth/Login') || req.nextUrl.pathname.startsWith('/auth');
-
-  if (!token && !isAuthPage) {
-    const url = req.nextUrl.clone();
-    url.pathname = '/auth/Login';
-    return NextResponse.redirect(url);
+  if (!token) {
+    const loginUrl = req.nextUrl.clone();
+    loginUrl.pathname = '/auth/Login';
+    loginUrl.searchParams.set('callbackUrl', req.nextUrl.pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();
@@ -17,6 +16,9 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    '/dashboard/:path*'
+    '/dashboard/:path*',
+    '/users/:path*',
+    '/masterful/:path*',
+    '/transitions/:path*'
   ],
 };
