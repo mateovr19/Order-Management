@@ -33,11 +33,26 @@ const authOptions: AuthOptions = {
         return {
           id: userFound.id.toString(),
           name: userFound.name,
-          email: userFound.email
+          email: userFound.email,
+          role: userFound.role
         };
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+      return session;
+    }
+  },
   pages: {
     signIn: "/auth/Login"
   }

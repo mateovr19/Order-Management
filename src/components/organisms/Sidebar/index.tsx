@@ -1,30 +1,58 @@
-import Link from 'next/link';
+'use client';
 
-const Sidebar = () => {
-  const userRole = 'admin'; // Simula el rol mientras no este la base de datso
+import Link from 'next/link';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
+export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { data: session, status } = useSession();
+
+  // Mostrar nada mientras se carga la sesión
+  if (status === 'loading') return null;
+
+  const userRole = session?.user?.role ?? 'USER';
 
   return (
-    <div>
-      <aside className="w-64 h-screen bg-gray-900 text-white p-4 fixed left-0 top-0">
+    <>
+      {/* Botón hamburguesa en móvil */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 bg-gray-900 text-white p-2 rounded"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        ☰
+      </button>
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 h-screem w-64 bg-gray-900 text-white p-4 z-40 transform transition-transform duration-300
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static md:block`}
+      >
         <h2 className="text-xl font-bold mb-4">Menú</h2>
         <ul>
           <li className="mb-2">
-            <Link href="/transitions" className="hover:underline">Transacciones</Link>
+            <Link href="/dashboard/transitions" className="hover:underline">Transacciones</Link>
           </li>
           <li className="mb-2">
-            <Link href="/masterful" className="hover:underline">Maestros</Link>
+            <Link href="/dashboard/masterful" className="hover:underline">Maestros</Link>
           </li>
 
-          {/* Solo los admin pueden ver este enlace */}
-          {userRole === 'admin' && (
+          {/* Solo para administradores */}
+          {userRole === 'ADMIN' && (
             <li className="mb-2">
-              <Link href="/users" className="hover:underline">Usuarios</Link>
+              <Link href="/dashboard/users" className="hover:underline">Usuarios</Link>
             </li>
           )}
         </ul>
       </aside>
-    </div>
-  );
-};
 
-export default Sidebar;
+      {/* Capa oscura detrás en móvil */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-40 z-30 md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+    </>
+  );
+}

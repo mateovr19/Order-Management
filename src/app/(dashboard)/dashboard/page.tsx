@@ -1,11 +1,6 @@
-import Sidebar from "../../../components/organisms/Sidebar/index";
+// app/dashboard/page.tsx
+import { redirect } from 'next/navigation';
 
 export default function DashboardHome() {
-    return (
-      <div>
-        
-        <Sidebar />
-      </div>
-    );
-  }
-  
+  redirect('/transitions');
+}
