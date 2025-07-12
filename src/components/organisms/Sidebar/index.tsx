@@ -93,7 +93,7 @@ export default function Sidebar() {
 
           {/* Botón cerrar sesión */}
           <button
-            onClick={() => signOut({ callbackUrl: '/auth/Login' })}
+            onClick={() => signOut({ callbackUrl: '/' })}
 
             className="cursor-pointer flex items-center gap-2 text-sm text-red-400 hover:text-red-200 transition"
           >

@@ -5,23 +5,17 @@ import SignIn from '../../../components/auth/SigninForm'
 
 export default function Login() {
   return (
-    <>
-      <Container size="1" height="100%" className="md:p-0">
-        <Flex className="h-screen w-full items-center">
-          <Card className='w-full' size="5">
-            <Heading>Sign In</Heading>
-            <SignIn />
-            <Flex justify="between" my="4">
-            <Text>
-              Don&apos;t have an Account?
-            </Text>
-            <Link asChild>
-              <NavLink href="/auth/Register" passHref>Sign Up</NavLink>
-            </Link>
-          </Flex>
-          </Card>
+    <Container size="1" height="100%" className="md:p-0">
+      <div className="bg-zinc-800/20 rounded-xl p-6">
+        <Heading color="yellow">Sign In</Heading>
+        <SignIn />
+        <Flex justify="between" my="4">
+          <Text color="yellow">Don&apos;t have an Account?</Text>
+          <Link color='yellow' asChild>
+            <NavLink href="/auth/Register" passHref>Sign Up</NavLink>
+          </Link>
         </Flex>
-      </Container>
-    </>
-  );
+      </div>
+    </Container>
+  )
 }
