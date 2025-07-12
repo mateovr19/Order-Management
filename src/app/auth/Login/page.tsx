@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Card, Heading, Flex, Text, Link } from '@radix-ui/themes'
+import { Container, Heading, Flex, Text, Link } from '@radix-ui/themes'
 import NavLink from 'next/link'
 import SignIn from '../../../components/auth/SigninForm'
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { Container, Text } from '@radix-ui/themes'
+import { Text } from '@radix-ui/themes'
 import SignIn from '@/app/auth/Login/page'
 
 export default function Home() {
