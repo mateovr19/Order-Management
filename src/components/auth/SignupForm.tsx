@@ -25,13 +25,13 @@ export default function SigninForm() {
   return (
     <form onSubmit={onSubmit}>
       <Flex direction='column' gap="2">
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name" className='text-yellow-600'>Nombre:</label>
         <Controller
           name='name'
           control={control}
           rules={{
             required: {
-              message: "Name is required",
+              message: "El nombre es requerido",
               value: true
             }
           }}
@@ -39,7 +39,7 @@ export default function SigninForm() {
             return (
               <TextField.Root 
                 type='text' 
-                placeholder='Write yout name'
+                placeholder='Escribe tu nombre'
                 autoFocus
                 { ... field }
               >
@@ -51,13 +51,13 @@ export default function SigninForm() {
           }}
         />
 
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className='text-yellow-600'>Correo:</label>
         <Controller
           name="email"
           control={control}
           rules={{
             required: {
-              message: "Email is required",
+              message: "El correo es requerido",
               value: true
             }
           }}
@@ -77,13 +77,13 @@ export default function SigninForm() {
         
         />
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className='text-yellow-600'>Contraseña:</label>
         <Controller
           name="password"
           control={control}
           rules={{
             required: {
-              message: "Password is required",
+              message: "La contraseña es requerida",
               value: true
             }
           }}
@@ -102,8 +102,8 @@ export default function SigninForm() {
           }}
         />
 
-        <Button type='submit'>
-            Sign Up
+        <Button type='submit' mt="4" color='orange'>
+            Registrarse
         </Button>
 
       </Flex>

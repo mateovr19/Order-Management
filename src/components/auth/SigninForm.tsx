@@ -28,7 +28,7 @@ export default function SigninForm() {
   return (
     <form onSubmit={onSubmit}>
       <Flex direction='column' gap="2" mt="2">
-        <label htmlFor="email" className='text-yellow-600'>Email</label>
+        <label htmlFor="email" className='text-yellow-600'>Correo</label>
         <Controller
           name='email'
           control={control}
@@ -56,7 +56,7 @@ export default function SigninForm() {
         />
         { errors.email && <Text color='red'>{errors.email.message}</Text>}
 
-        <label htmlFor="password" className='text-yellow-600'>Password</label>
+        <label htmlFor="password" className='text-yellow-600'>Contraseña</label>
         <Controller
           name="password"
           control={control}
@@ -86,8 +86,8 @@ export default function SigninForm() {
         />
         { errors.password && <Text color='red' className='text-xs'>{errors.password.message}</Text>}
 
-        <Button type='submit' mt="4" color='gold'>
-            Sign In
+        <Button type='submit' mt="4" color='orange'>
+            Iniciar Sesión
         </Button>
 
       </Flex>
