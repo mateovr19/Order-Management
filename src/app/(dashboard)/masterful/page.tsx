@@ -4,7 +4,6 @@ import Dialog from '@/components/molecules/Dialog/index'
 
 export default function MasterfulPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [reload, setReload] = useState(false);
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
 
