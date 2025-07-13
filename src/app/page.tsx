@@ -19,7 +19,7 @@ export default function Home() {
     >
       <div className="h-full w-full flex items-center">
         <div className="lg:ml-20 lg:mb-15 lg:max-w-sm w-full max-w-xl flex flex-col items-center">
-          <Text size="7" weight="bold" color="yellow" as="p" align="center">
+          <Text size="7" weight="bold" as="p" align="center" className="text-yellow-300">
             Bienvenid@
           </Text>
           {isSignUp ? <SignUp /> : <SignIn />}

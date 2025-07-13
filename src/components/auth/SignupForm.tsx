@@ -25,7 +25,7 @@ export default function SigninForm() {
   return (
     <form onSubmit={onSubmit}>
       <Flex direction='column' gap="2">
-        <label htmlFor="name" className='text-yellow-600'>Nombre:</label>
+        <label htmlFor="name" className='text-yellow-300'>Nombre:</label>
         <Controller
           name='name'
           control={control}
@@ -51,7 +51,7 @@ export default function SigninForm() {
           }}
         />
 
-        <label htmlFor="email" className='text-yellow-600'>Correo:</label>
+        <label htmlFor="email" className='text-yellow-300'>Correo:</label>
         <Controller
           name="email"
           control={control}
@@ -77,7 +77,7 @@ export default function SigninForm() {
         
         />
 
-        <label htmlFor="password" className='text-yellow-600'>Contraseña:</label>
+        <label htmlFor="password" className='text-yellow-300'>Contraseña:</label>
         <Controller
           name="password"
           control={control}

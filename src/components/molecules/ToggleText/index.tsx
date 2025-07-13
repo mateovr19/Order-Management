@@ -9,7 +9,7 @@ interface ToggleTextProps {
 
 export default function ToggleText( { toggleForm, isSignUp, children }: ToggleTextProps) {
   return (
-    <Flex justify="between" my="-9" className='flex flex-col items-center lg:flex-row'>
+    <Flex justify="between" my="-9" className='flex flex-row items-center'>
       {isSignUp ? (
         <>
           <Text className='mr-4 text-yellow-300'>Ya tienes una cuenta?</Text>
