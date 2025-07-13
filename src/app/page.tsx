@@ -17,11 +17,11 @@ export default function Home() {
       className="h-screen w-screen bg-cover bg-center"
       style={{ backgroundImage: 'url(/Home-page.jpg)'}}
     >
-      <div className="h-full w-full flex items-center">
-        <div className="lg:ml-20 lg:mb-15 lg:max-w-sm w-full max-w-xl flex flex-col items-center">
-          <Text size="7" weight="bold" as="p" align="center" className="text-yellow-300">
-            Bienvenid@
-          </Text>
+      <div className="h-full w-full flex flex-col justify-center items-center lg:ml-20 lg:max-w-sm">
+        <Text size="7" weight="bold" as="p" align="center" className="text-yellow-300">
+          Bienvenid@
+        </Text>
+        <div className="lg:mb-15 w-full max-w-xl flex flex-col items-center my-50 lg:my-0">
           {isSignUp ? <SignUp /> : <SignIn />}
           <ToggleText
             toggleForm={toggleForm}
