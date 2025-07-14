@@ -44,10 +44,12 @@ export default function TransitionsPageClient({ masters, transitions }: Props) {
         <ArrowDownUp size={30} className="text-secondary" />
       </div>
 
-      <div className="flex items-center space-x-4">
-        <label htmlFor="master-select" className="text-sm text-gray-700 font-medium">
-          Selecciona maestro:
-        </label>
+      <div className="card flex flex-col items-stretch gap-4">
+
+        <h3>
+           Selecciona maestro:
+        </h3>
+    
         <select
           id="master-select"
           className="border border-gray-300 rounded px-3 py-1"

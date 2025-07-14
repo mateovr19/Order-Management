@@ -29,13 +29,13 @@
   --foreground: #231D1E; 
 
   /* Alternativos para modo oscuro */
-  /* --background-dark: #0f172a;*/
-  --foreground-light: #231D1E99;
+ --background: 0 0% 100%;
+ --foreground-light: #231D1E99;
 
     /* Fondo de secciones */
-  --bg-sidebar: 240 4% 12%;          
-  --bg-main: 0 0% 98%;              
-  --bg-card:#FFFFFF;              
+  --bg-sidebar: 45 40% 98%;         
+  /* --bg-main: 0 0% 98%;              
+  --bg-card:#FFFFFF;               */
 }
 
 
@@ -46,7 +46,7 @@
   --color-foreground: var(--foreground);
   --color-foreground-light: var(--foreground-light);
   --color-card: var(--background-card);
-  --color-sidebar: var(--bg-sidebar);
+  --color-bg-sidebar: var(--bg-sidebar);
   --color-main: var(--bg-main);
 
 }
@@ -62,4 +62,42 @@ h3 {
 
 p {
   @apply text-foreground-light;
+}
+
+/* === Tabla base === */
+.table-base {
+  @apply table-auto w-full border-collapse text-sm;
+}
+
+/* === Encabezado (thead) === */
+.table-header-cell {
+  @apply border-b border-gray-200 p-4 pt-0 pb-3 pl-8 text-left font-medium text-gray-700 dark:border-gray-600 dark:text-gray-200;
+}
+
+/* === Celdas del cuerpo (tbody > td) === */
+.table-cell {
+  @apply border-b border-gray-100 p-4 pl-8 text-gray-700 dark:border-gray-700 dark:text-gray-300;
+}
+
+/* === Celdas para texto más claro (ej: fecha) === */
+.table-cell-muted {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+/* === Celdas con color destacado (ej: rol) === */
+.table-cell-role-admin {
+  @apply text-blue-600 dark:text-blue-400;
+}
+.table-cell-role-user {
+  @apply text-green-600 dark:text-green-400;
+}
+
+/* === Botón de acción === */
+.table-action-button {
+  @apply px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition;
+}
+
+
+.card {
+  @apply p-7 rounded-xl bg-white shadow-md border border-gray-200;
 }

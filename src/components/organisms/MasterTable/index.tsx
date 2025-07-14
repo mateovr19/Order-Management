@@ -15,30 +15,31 @@ interface MasterTableProps {
 
 export default function MasterTable({ masters }: MasterTableProps) {
   return (
-    <div className="rounded-md border shadow-sm">
-      <div className="p-4 border-b">
-        <h2 className="text-lg font-semibold">Lista de Maestros</h2>
-      </div>
-      <div className="p-4">
+    <div className="card flex flex-col gap-5">
+
+      <h3>
+        Lista de Maestros
+      </h3>
+
         {masters.length > 0 ? (
-          <table className="w-full text-sm">
+          <table className="table-base">
             <thead>
-              <tr className="border-b">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Saldo</th>
-                <th>Creador</th>
-                <th>Fecha de Creación</th>
+              <tr >
+                <th className="table-header-cell">ID</th>
+                <th className="table-header-cell">Nombre</th>
+                <th className="table-header-cell">Saldo</th>
+                <th className="table-header-cell">Creador</th>
+                <th className="table-header-cell">Fecha de Creación</th>
               </tr>
             </thead>
             <tbody>
               {masters.map((master) => (
                 <tr key={master.id} className="border-b hover:bg-gray-50">
-                  <td className="font-mono">{master.id}...</td>
-                  <td>{master.name}</td>
-                  <td>{master.balance}</td>
-                  <td>{master.email}</td>
-                  <td>{new Date(master.createdAt).toLocaleDateString()}</td>
+                  <td className="table-cell">{master.id}...</td>
+                  <td  className="table-cell">{master.name}</td>
+                  <td  className="table-cell">{master.balance}</td>
+                  <td  className="table-cell">{master.email}</td>
+                  <td  className="table-cell">{new Date(master.createdAt).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>
@@ -47,6 +48,6 @@ export default function MasterTable({ masters }: MasterTableProps) {
           <p className="text-gray-500">No hay maestros registrados.</p>
         )}
       </div>
-    </div>
+
   );
 }
