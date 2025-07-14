@@ -1,28 +1,58 @@
 @import "tailwindcss";
 
 :root {
-    
-    
+  /* Colores base */
+  --color-primary: #880606;         
+  /* --color-primary-light: #3b82f6; 
+  --color-primary-dark: #1e3a8a; */
 
+  --color-secondary: #ff8207; 
+  /* --color-secondary-light: #fbbf24;
+  --color-secondary-dark: #b45309; */
+
+  /* --color-accent: #10b981;
+  --color-accent-light: #34d399;
+  --color-accent-dark: #059669; */
+
+  /* --color-neutral: #64748b;
+  --color-neutral-light: #94a3b8;
+  --color-neutral-dark: #475569; */
+
+  /* Feedback o estados */
+  /* --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error:   #ef4444;
+  --color-info:    #3b82f6; */
+
+  /* Fondo y texto */
+  /* --background: #231D1E; */
+  --foreground: #231D1E;
+
+  /* Alternativos para modo oscuro */
+  /* --background-dark: #0f172a;*/
+  --foreground-light: #231D1E99; 
 }
 
 
 @theme {
-  --color-primary: #880606;
-  --color-secondary:#FF8207;
-  --color-custom-gray: #231D1E99
-  /* --color-secondary: #2d314d;
-  --color-gris: #9597a5; */
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+ --color-background: var(--background); 
+ --color-foreground: var(--foreground);
+ --color-foreground-light: var(--foreground-light);
+}
+
+
+h1 {
+  @apply text-3xl font-bold leading-tight text-foreground;
 }
 
 p{
-    font-size: 16px;
-    color: #231D1E99;
+  @apply  text-foreground-light;
 }
 
-h1 {
-    font-size: 30px;
-    font-weight: 700;
-    color: black
 
-}
+
+
+
+
