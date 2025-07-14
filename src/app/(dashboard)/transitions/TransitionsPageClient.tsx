@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import HeadingBlock from '@/components/molecules/HeadingBlock'
 import { ArrowDownUp } from 'lucide-react'
 import TransitionsTable from '@/components/organisms/TransitionsTable'
