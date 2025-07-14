@@ -1,32 +1,36 @@
-'use client'
 import React, { useState } from 'react'
-import Dialog from '@/components/molecules/Dialog/index'
+import Masters from '@/components/Templates/Masterful/index'
+import MasterTable from '@/components/organisms/MasterTable';
+import { prisma } from '@/libs/prisma';
 
-export default function MasterfulPage() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const handleOpenDialog = () => setDialogOpen(true);
-  const handleCloseDialog = () => setDialogOpen(false);
+async function loadMasters() {
+  return await prisma.master.findMany({
+    include: {
+      creator: {
+        select: {
+          email: true,
+        },
+      },
+    },
+  });
+}
+
+export default async function MasterfulPage() {
+  let master = await loadMasters();
+  const masters = master.map((m) => ({
+    id: m.id,
+    name: m.name,
+    balance: m.balance,
+    email: m.creator.email,
+    createdAt: m.createdAt.toISOString(),
+  }));
 
   return (
     <div className="space-y-6 p-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-brand-dark">Maestros</h1>
-          <p className="text-brand-dark/60">Gestiona el catálogo de productos</p>
-        </div>
-        <div className="flex items-center space-x-4">
-          {/* Botón para abrir el modal */}
-          <button
-            onClick={handleOpenDialog}
-            className="gradient-primary text-black p-2 bg-amber-400 rounded-md"
-          >
-            Agregar Maestro
-          </button>
-        </div>
-      </div>
-
-      {/* Modal (Dialog) */}
-      <Dialog open={dialogOpen} onClose={handleCloseDialog} />
+      <Masters />
+      <MasterTable masters={masters} />
+      
     </div>
+    
   );
 }
