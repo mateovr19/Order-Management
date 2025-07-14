@@ -1,14 +1,32 @@
-import HeadingBlock from '@/components/molecules/HeadingBlock'
-import { ArrowDownUp } from 'lucide-react'
-import React from 'react'
+// 📄 /app/(dashboard)/transacciones/page.tsx
+import { prisma } from '@/libs/prisma'
+import TransitionsPageClient from './TransitionsPageClient'
 
-const page = () => {
-  return (
-    <div className='flex flex-row justify-between items-center'>
-      <HeadingBlock title={'Transacciones'} description={'Gestiona los movimientos de inventario'}  />
-       <ArrowDownUp size={30} className='text-secondary'/>
-    </div>
-  )
+export default async function TransitionsPage() {
+  const masterList = await prisma.master.findMany()
+  const transactionList = await prisma.transaction.findMany({
+    include: {
+      responsible: {
+        select: {
+          email: true,
+        },
+      },
+    },
+  })
+
+  const masters = masterList.map((m) => ({
+    id: m.id,
+    name: m.name,
+    balance: m.balance,
+  }))
+
+  const transitions = transactionList.map((t) => ({
+    id: t.id,
+    date: t.date.toISOString(),
+    quantity: t.quantity,
+    name: t.responsible.email,
+    masterId: t.masterId,
+  }))
+
+  return <TransitionsPageClient masters={masters} transitions={transitions} />
 }
-
-export default page
