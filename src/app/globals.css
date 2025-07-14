@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+:root {
+    
+    
+
+}
+
+
+@theme {
+  --color-primary: #880606;
+  --color-secondary:#FF8207;
+  --color-custom-gray: #231D1E99
+  /* --color-secondary: #2d314d;
+  --color-gris: #9597a5; */
+}
+
+p{
+    font-size: 16px;
+    color: #231D1E99;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: black
+
+}
