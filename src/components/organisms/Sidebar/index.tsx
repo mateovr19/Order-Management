@@ -30,7 +30,7 @@ export default function Sidebar() {
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static flex flex-col justify-between`}
       >
         {/* Menú principal */}
-        <Menu />
+        <Menu onNavigate={() => setIsOpen(false)} />
         {/* Perfil de usuario + cerrar sesión */}
         <div className="border-t border-gray-700 pt-4 mt-6">
         <Profile />
