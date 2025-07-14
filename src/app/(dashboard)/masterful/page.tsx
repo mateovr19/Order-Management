@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Masters from '@/components/Templates/Masterful/index'
 import MasterTable from '@/components/organisms/MasterTable';
 import { prisma } from '@/libs/prisma';
@@ -16,7 +16,7 @@ async function loadMasters() {
 }
 
 export default async function MasterfulPage() {
-  let master = await loadMasters();
+  const master = await loadMasters();
   const masters = master.map((m) => ({
     id: m.id,
     name: m.name,
