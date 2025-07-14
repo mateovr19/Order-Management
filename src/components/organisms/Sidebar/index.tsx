@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 import {
   LogOut,
+  Menu as MenuIcon,
 } from 'lucide-react';
 import Menu from '@/components/molecules/menu';
 import Profile from '@/components/molecules/profile';
@@ -14,34 +15,22 @@ export default function Sidebar() {
   const handleSignOut = () => {
     signOut({ callbackUrl: '/' });
   };
-
-
   return (
     <>
       {/* Botón hamburguesa en móvil */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 bg-gray-900 text-white p-2 rounded"
+        className="md:hidden fixed top-4 left-4 z-50 bg-primary text-white  p-2 rounded"
         onClick={() => setIsOpen(!isOpen)}
-      >
-        <Menu />
+      >   
+        <MenuIcon size={24} />
       </button>
-
-      <div>
-        
-      </div>
-
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen w-64 bg-gray-900 text-white p-4 z-40 transform transition-transform duration-300
+        className={`fixed top-0 left-0 md:h-screen h-full w-64 bg-secondary text-white p-4 z-40 transform transition-transform duration-300
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static flex flex-col justify-between`}
       >
         {/* Menú principal */}
-        <Menu />
-        
-        <div>
-          
-        </div>
-
+        <Menu onNavigate={() => setIsOpen(false)} />
         {/* Perfil de usuario + cerrar sesión */}
         <div className="border-t border-gray-700 pt-4 mt-6">
         <Profile />
@@ -49,7 +38,7 @@ export default function Sidebar() {
           {/* Botón cerrar sesión */}
           <button
             onClick={() => handleSignOut()}
-            className="cursor-pointer flex items-center gap-2 text-sm text-red-400 hover:text-red-200 transition"
+            className="cursor-pointer flex items-center gap-2 text-sm bg-primary text-white p-2 rounded hover:text-red-200 transition"
           >
             <LogOut size={18} />
             Cerrar sesión
