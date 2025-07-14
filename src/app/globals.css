@@ -2,11 +2,11 @@
 
 :root {
   /* Colores base */
-  --color-primary: #880606;         
+  --color-primary: #880606;
   /* --color-primary-light: #3b82f6; 
   --color-primary-dark: #1e3a8a; */
 
-  --color-secondary: #ff8207; 
+  --color-secondary: #ff8207;
   /* --color-secondary-light: #fbbf24;
   --color-secondary-dark: #b45309; */
 
@@ -26,20 +26,29 @@
 
   /* Fondo y texto */
   /* --background: #231D1E; */
-  --foreground: #231D1E;
+  --foreground: #231D1E; 
 
   /* Alternativos para modo oscuro */
   /* --background-dark: #0f172a;*/
-  --foreground-light: #231D1E99; 
+  --foreground-light: #231D1E99;
+
+    /* Fondo de secciones */
+  --bg-sidebar: 240 4% 12%;          
+  --bg-main: 0 0% 98%;              
+  --bg-card:#FFFFFF;              
 }
 
 
 @theme {
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
- --color-background: var(--background); 
- --color-foreground: var(--foreground);
- --color-foreground-light: var(--foreground-light);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-light: var(--foreground-light);
+  --color-card: var(--background-card);
+  --color-sidebar: var(--bg-sidebar);
+  --color-main: var(--bg-main);
+
 }
 
 
@@ -51,12 +60,6 @@ h3 {
   @apply text-2xl font-semibold leading-none text-foreground;
 }
 
-p{
-  @apply  text-foreground-light;
+p {
+  @apply text-foreground-light;
 }
-
-
-
-
-
-

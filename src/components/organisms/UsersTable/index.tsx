@@ -3,7 +3,7 @@ import React from 'react'
 const Index = () => {
   return (
 
-    <div className='flex flex-col gap-5 rounded-lg border bg-card p-7 '>
+    <div className='flex flex-col gap-5 rounded-lg border bg-background-card p-7 '>
       <h3>
         Lista de Usuarios
       </h3>
