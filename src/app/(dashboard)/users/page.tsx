@@ -1,40 +1,23 @@
 import React from 'react'
 
-import { Users} from 'lucide-react';
+import { Info, Users } from 'lucide-react';
+import HeadingBlock from '@/components/molecules/HeadingBlock';
+import InfoCard from '@/components/organisms/InfoCard';
+import UsersTable from '@/components/organisms/UsersTable';
 
 const page = () => {
   return (
     <div className='flex flex-col gap-6'>
 
-      <div className='flex flex-col gap-1'>
 
-        <h1 >Usuarios</h1>
-        <p >  Administra usuarios y roles del sistema</p>
+
+      <div className="flex flex-row justify-between items-center">
+        <HeadingBlock title={'Usuarios'} description={'Administra usuarios y roles del sistema'} />
+        <Users size={30} className='text-secondary' />
       </div>
 
-      <div className='flex flex-row max-w-[200px] p-[24px] border'>
-
-        <div className="flex flex-row gap-2" >
-
-          <div>
-            <Users size={30}/>
-          </div>
-
-          <div className='flex flex-col'>
-            <h2>
-              Total Usuarios
-            </h2>
-            <span>
-              3
-            </span>
-          </div>
-
-        </div>
-
-
-
-      </div>
-
+    <UsersTable />
+    
     </div>
   )
 }
