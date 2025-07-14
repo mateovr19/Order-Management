@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { Info, Users } from 'lucide-react';
+import { Users } from 'lucide-react';
 import HeadingBlock from '@/components/molecules/HeadingBlock';
-import InfoCard from '@/components/organisms/InfoCard';
 import UsersTable from '@/components/organisms/UsersTable';
 
 const page = () => {
