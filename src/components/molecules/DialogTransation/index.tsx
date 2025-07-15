@@ -13,7 +13,7 @@ interface MovementDialogProps {
   masterId: number;
 }
 
-export default function MovementDialog({ open, onClose, masterId, productName }: MovementDialogProps) {
+export default function MovementDialog({ open, onClose, masterId, productName}: MovementDialogProps) {
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm({
     defaultValues: {
