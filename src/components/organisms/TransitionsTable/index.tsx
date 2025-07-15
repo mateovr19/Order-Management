@@ -20,26 +20,28 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
         Historial de Transacciones
       </h3>
         {transitions.length > 0 ? (
-          <table className="table-base">
-            <thead>
-              <tr >
-                <th  className="table-header-cell" >ID</th>
-                <th  className="table-header-cell">Fecha</th>
-                <th  className="table-header-cell">Cantidad</th>
-                <th  className="table-header-cell">Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transitions.map((transiciones) => (
-                <tr key={transiciones.id} className="border-b hover:bg-gray-50">
-                  <td className="table-cell">{transiciones.id}...</td>
-                  <td className="table-cell">{transiciones.date}</td>
-                  <td className="table-cell">{transiciones.quantity}</td>
-                  <td className="table-cell">{transiciones.name}</td>
+          <div className="max-h-90 overflow-y-auto">
+            <table className="table-base">
+              <thead>
+                <tr >
+                  <th  className="table-header-cell" >ID</th>
+                  <th  className="table-header-cell">Fecha</th>
+                  <th  className="table-header-cell">Cantidad</th>
+                  <th  className="table-header-cell">Name</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {transitions.map((transiciones) => (
+                  <tr key={transiciones.id} className="border-b hover:bg-gray-50">
+                    <td className="table-cell">{transiciones.id}...</td>
+                    <td className="table-cell">{transiciones.date}</td>
+                    <td className="table-cell">{transiciones.quantity}</td>
+                    <td className="table-cell">{transiciones.name}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p className="text-gray-500">No hay transiciones registradas.</p>
         )}

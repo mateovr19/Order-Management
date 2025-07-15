@@ -1,11 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { Flex, TextField, Button } from '@radix-ui/themes';
 import { EnvelopeClosedIcon, LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 
 export default function SigninForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const { 
     control,
     handleSubmit
@@ -18,6 +19,7 @@ export default function SigninForm() {
   })
 
   const onSubmit = handleSubmit(async (data) => {
+    setIsLoading(true);
     console.log(data)
     const res = await axios.post('/api/auth/register', data)
     console.log(res)
@@ -102,7 +104,7 @@ export default function SigninForm() {
           }}
         />
 
-        <Button type='submit' mt="4" color='orange'>
+        <Button type='submit' mt="4" color='orange' style={{ cursor: 'pointer' }} loading={isLoading} variant='classic'>
             Registrarse
         </Button>
 

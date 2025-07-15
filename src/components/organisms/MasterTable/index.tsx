@@ -22,28 +22,30 @@ export default function MasterTable({ masters }: MasterTableProps) {
       </h3>
 
         {masters.length > 0 ? (
-          <table className="table-base">
-            <thead>
-              <tr >
-                <th className="table-header-cell">ID</th>
-                <th className="table-header-cell">Nombre</th>
-                <th className="table-header-cell">Saldo</th>
-                <th className="table-header-cell">Creador</th>
-                <th className="table-header-cell">Fecha de Creación</th>
-              </tr>
-            </thead>
-            <tbody>
-              {masters.map((master) => (
-                <tr key={master.id} className="border-b hover:bg-gray-50">
-                  <td className="table-cell">{master.id}...</td>
-                  <td  className="table-cell">{master.name}</td>
-                  <td  className="table-cell">{master.balance}</td>
-                  <td  className="table-cell">{master.email}</td>
-                  <td  className="table-cell">{new Date(master.createdAt).toLocaleDateString()}</td>
+          <div className="max-h-90 overflow-y-auto">
+            <table className="table-base">
+              <thead>
+                <tr >
+                  <th className="table-header-cell">ID</th>
+                  <th className="table-header-cell">Nombre</th>
+                  <th className="table-header-cell">Saldo</th>
+                  <th className="table-header-cell">Creador</th>
+                  <th className="table-header-cell">Fecha de Creación</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {masters.map((master) => (
+                  <tr key={master.id} className="border-b hover:bg-gray-50">
+                    <td className="table-cell">{master.id}...</td>
+                    <td  className="table-cell">{master.name}</td>
+                    <td  className="table-cell">{master.balance}</td>
+                    <td  className="table-cell">{master.email}</td>
+                    <td  className="table-cell">{new Date(master.createdAt).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p className="text-gray-500">No hay maestros registrados.</p>
         )}

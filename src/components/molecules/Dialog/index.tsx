@@ -74,10 +74,10 @@ export default function Dialog({ open, onClose }: DialogProps) {
                 />
 
                 <div className="flex justify-end space-x-2 mt-4 gap-2">
-                    <Button type='submit' disabled={loading} onClick={onClose} mt="4" color='red'>
+                    <Button type='submit' disabled={loading} onClick={onClose} mt="4" color='red' style={{ cursor: 'pointer' }}>
                         Cancelar
                     </Button>
-                    <Button type='submit' disabled={loading} mt="4" color='green'>
+                    <Button type='submit' disabled={loading} mt="4" color='green' style={{ cursor: 'pointer' }}>
                         {loading ? "Creando..." : "Crear Maestro"}
                     </Button>
                 </div>

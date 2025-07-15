@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Dialog from '@/components/molecules/Dialog/index'
+import { Button } from '@radix-ui/themes';
 
 export default function Masters() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -16,12 +17,9 @@ export default function Masters() {
         </div>
         <div className="flex items-center space-x-4">
           {/* Botón para abrir el modal */}
-          <button
-            onClick={handleOpenDialog}
-            className="gradient-primary text-black p-2 bg-amber-400 rounded-md"
-          >
+          <Button onClick={handleOpenDialog} mt="4" color='yellow' size="3" style={{ cursor: 'pointer' }}>
             Agregar Maestro
-          </button>
+          </Button>
         </div>
       </div>
       <Dialog open={dialogOpen} onClose={handleCloseDialog}/>

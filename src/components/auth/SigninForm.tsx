@@ -1,11 +1,12 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Flex, TextField, Button, Text } from '@radix-ui/themes';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { useForm, Controller } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 
 export default function SigninForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const { 
     control, 
     handleSubmit, 
@@ -17,7 +18,7 @@ export default function SigninForm() {
     }
   });
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+    setIsLoading(true);
     await signIn('credentials', {
       redirect: true,
       email: data.email,
@@ -86,7 +87,7 @@ export default function SigninForm() {
         />
         { errors.password && <Text color='red' className='text-xs'>{errors.password.message}</Text>}
 
-        <Button type='submit' mt="4" color='orange'>
+        <Button type='submit' mt="4" color='orange' style={{ cursor: 'pointer' }} loading={isLoading} variant='classic'>
             Iniciar Sesión
         </Button>
 
