@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import HeadingBlock from '@/components/molecules/HeadingBlock'
 import { ArrowDownUp } from 'lucide-react'
 import TransitionsTable from '@/components/organisms/TransitionsTable'
@@ -47,29 +47,34 @@ export default function TransitionsPageClient({ masters, transitions }: Props) {
       <div className="card flex flex-col items-stretch gap-4">
 
         <h3>
-           Selecciona maestro:
+          Selecciona maestro:
         </h3>
-    
-        <select
-          id="master-select"
-          className="border border-gray-300 rounded px-3 py-1"
-          onChange={(e) => setSelectedMasterId(Number(e.target.value))}
-          defaultValue=""
-        >
-          <option value="" disabled>Selecciona un maestro</option>
-          {masters.map((m) => (
-            <option key={m.id} value={m.id}>
-              {m.name} — ${m.balance}
-            </option>
-          ))}
-        </select>
 
-        {selectedMaster && (
-          <Transitions
-            masterId={selectedMaster.id}
-            productName={selectedMaster.name}
-          />
-        )}
+        <div className='flex flex-row gap-4'>
+
+          <select
+            id="master-select"
+            className="flex-grow border border-gray-300 rounded px-3 py-1"
+            onChange={(e) => setSelectedMasterId(Number(e.target.value))}
+            defaultValue=""
+          >
+            <option value="" disabled>Selecciona un maestro</option>
+            {masters.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.name} — ${m.balance}
+              </option>
+            ))}
+          </select>
+
+            {selectedMaster && (
+              <Transitions
+                masterId={selectedMaster.id}
+                productName={selectedMaster.name}
+              />
+            )}
+
+        </div>
+
       </div>
 
       {selectedMaster && (

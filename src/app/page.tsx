@@ -18,7 +18,7 @@ export default function Home() {
       style={{ backgroundImage: 'url(/Home-page.jpg)'}}
     >
       <div className="h-full w-full flex flex-col justify-center items-center lg:ml-20 lg:max-w-sm">
-        <Text size="7" weight="bold" as="p" align="center" className="text-yellow-300">
+        <Text size="7" weight="bold" as="p" align="center" className="!text-yellow-300">
           Bienvenid@
         </Text>
         <div className="lg:mb-15 w-full max-w-xl flex flex-col items-center my-50 lg:my-0">
