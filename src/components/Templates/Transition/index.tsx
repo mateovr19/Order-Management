@@ -19,7 +19,7 @@ export default function Masters({ masterId, productName }: MastersProps) {
         <div className="flex items-center space-x-4">
           <button
             onClick={handleOpenDialog}
-            className="gradient-primary text-white p-2 bg-primary rounded-md"
+            className="cursor-pointer gradient-primary text-white p-2 bg-primary rounded-md"
           >
             Agregar Transacción
           </button>

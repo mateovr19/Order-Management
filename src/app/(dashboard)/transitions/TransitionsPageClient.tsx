@@ -15,6 +15,7 @@ interface Master {
 interface Transaction {
   id: number
   date: string
+  type: string
   quantity: number
   name: string
   masterId: number

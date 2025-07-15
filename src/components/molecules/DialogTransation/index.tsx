@@ -52,14 +52,18 @@ export default function MovementDialog({ open, onClose, masterId, productName }:
               control={control}
               render={({ field }) => (
                 <RadioGroup.Root
-                  defaultValue="entrada"
-                  {...field}
-                  className="flex gap-4"
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  className="flex gap-4 cursor-pointer"
                 >
-                  <RadioGroup.Item value="entrada" id="entrada" />
-                  <label htmlFor="entrada" className="text-sm">Entrada</label>
-                  <RadioGroup.Item value="salida" id="salida" />
-                  <label htmlFor="salida" className="text-sm">Salida</label>
+                  <div className="flex items-center gap-2 cursor-pointer">
+                    <RadioGroup.Item value="entrada" id="entrada" />
+                    <label htmlFor="entrada" className="text-sm cursor-pointer">Entrada</label>
+                  </div>
+                  <div className="flex items-center gap-2 cursor-pointer">
+                    <RadioGroup.Item value="salida" id="salida" />
+                    <label htmlFor="salida" className="text-sm cursor-pointer">Salida</label>
+                  </div>
                 </RadioGroup.Root>
               )}
             />
@@ -82,10 +86,10 @@ export default function MovementDialog({ open, onClose, masterId, productName }:
           </div>
 
           <div className="flex justify-end gap-2 pt-4">
-            <Button type="button" color="gray" onClick={onClose} disabled={loading}>
+            <Button type="button" color="gray" onClick={onClose} disabled={loading} style={{ cursor: 'pointer' }}>
               Cancelar
             </Button>
-            <Button type="submit" color="orange" disabled={loading}>
+            <Button type="submit" color="orange" disabled={loading} style={{ cursor: 'pointer' }}>
               {loading ? "Creando..." : "Crear Movimiento"}
             </Button>
           </div>

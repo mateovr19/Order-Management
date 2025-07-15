@@ -23,6 +23,7 @@ export default async function TransitionsPage() {
   const transitions = transactionList.map((t) => ({
     id: t.id,
     date: t.date.toISOString(),
+    type: t.type,
     quantity: t.quantity,
     name: t.responsible.email,
     masterId: t.masterId,
