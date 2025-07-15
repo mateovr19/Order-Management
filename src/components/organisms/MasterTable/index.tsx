@@ -35,7 +35,7 @@ export default function MasterTable({ masters }: MasterTableProps) {
               </thead>
               <tbody>
                 {masters.map((master) => (
-                  <tr key={master.id} className="border-b hover:bg-gray-50">
+                  <tr key={master.id} className="border-b table-row">
                     <td className="table-cell">{master.id}...</td>
                     <td  className="table-cell">{master.name}</td>
                     <td  className="table-cell">{master.balance}</td>

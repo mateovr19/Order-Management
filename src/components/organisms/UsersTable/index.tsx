@@ -19,8 +19,8 @@ const Index = () => {
               <th className="table-header-cell">Acciones</th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-gray-900">
-            <tr className="border-b hover:bg-gray-50">
+          <tbody className="bg-white dark:bg-white">
+            <tr className="border-b table-row">
               <td className="table-cell">Juan Pérez</td>
               <td className="table-cell">juan.perez@email.com</td>
               <td className="table-cell table-cell-role-admin">ADMIN</td>
@@ -29,7 +29,7 @@ const Index = () => {
                 <button className="table-action-button">Editar</button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-gray-50">
+            <tr className="border-b table-row">
               <td className="table-cell">Ana Gómez</td>
               <td className="table-cell">ana.gomez@email.com</td>
               <td className="table-cell table-cell-role-user">USER</td>
@@ -38,7 +38,7 @@ const Index = () => {
                 <button className="table-action-button">Editar</button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-gray-50">
+            <tr className="border-b table-row">
               <td className="table-cell">Carlos Ruiz</td>
               <td className="table-cell">carlos.ruiz@email.com</td>
               <td className="table-cell table-cell-role-user">USER</td>

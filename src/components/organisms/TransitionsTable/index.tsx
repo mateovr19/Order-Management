@@ -32,8 +32,8 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
               </thead>
               <tbody>
                 {transitions.map((transiciones) => (
-                  <tr key={transiciones.id} className="border-b hover:bg-gray-50">
-                    <td className="table-cell">{transiciones.id}...</td>
+                  <tr key={transiciones.id} className="border-b table-row">
+                    <td className="table-cell ">{transiciones.id}...</td>
                     <td className="table-cell">{transiciones.date}</td>
                     <td className="table-cell">{transiciones.quantity}</td>
                     <td className="table-cell">{transiciones.name}</td>

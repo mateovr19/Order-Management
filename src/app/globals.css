@@ -71,12 +71,12 @@ p {
 
 /* === Encabezado (thead) === */
 .table-header-cell {
-  @apply border-b border-gray-200 p-4 pt-0 pb-3 pl-8 text-left font-medium text-gray-700 dark:border-gray-600 dark:text-gray-200;
+  @apply border-b border-gray-200 p-4 pt-0 pb-3 pl-8 text-left font-medium text-gray-700 dark:border-gray-600 dark:text-black;
 }
 
 /* === Celdas del cuerpo (tbody > td) === */
 .table-cell {
-  @apply border-b border-gray-100 p-4 pl-8 text-gray-700 dark:border-gray-700 dark:text-gray-300;
+  @apply border-b border-gray-100 p-4 pl-8 text-gray-700 dark:border-gray-700 dark:text-black;
 }
 
 /* === Celdas para texto más claro (ej: fecha) === */
@@ -92,6 +92,7 @@ p {
   @apply text-green-600 dark:text-green-400;
 }
 
+
 /* === Botón de acción === */
 .table-action-button {
   @apply px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition;
@@ -100,4 +101,9 @@ p {
 
 .card {
   @apply p-7 rounded-xl bg-white shadow-md border border-gray-200;
+}
+
+/* === Estilo base para cada fila de la tabla === */
+.table-row {
+  @apply border-b hover:bg-gray-300 transition-colors;
 }
