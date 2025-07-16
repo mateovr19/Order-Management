@@ -51,7 +51,7 @@ export default function TransitionsPageClient({ masters, transitions }: Props) {
           Selecciona maestro:
         </h3>
 
-        <div className='flex flex-row gap-4'>
+        <div className='flex md:flex-row flex-col gap-4'>
 
           <select
             id="master-select"
