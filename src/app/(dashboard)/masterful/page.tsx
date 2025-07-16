@@ -26,11 +26,11 @@ export default async function MasterfulPage() {
   }));
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="flex flex-col h-full min-h-0 space-y-6">
       <Masters />
-      <MasterTable masters={masters} />
-      
+      <div className="flex-1 min-h-0">
+        <MasterTable masters={masters} />
+      </div>
     </div>
-    
   );
 }
