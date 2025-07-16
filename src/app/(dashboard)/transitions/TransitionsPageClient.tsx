@@ -5,6 +5,7 @@ import HeadingBlock from '@/components/molecules/HeadingBlock'
 import { ArrowDownUp } from 'lucide-react'
 import TransitionsTable from '@/components/organisms/TransitionsTable'
 import Transitions from '@/components/Templates/Transition/index'
+import TransitionsGraph from '@/components/organisms/TransitionsGraph'
 
 interface Master {
   id: number
@@ -36,6 +37,7 @@ export default function TransitionsPageClient({ masters, transitions }: Props) {
     : transitions
 
   return (
+    
     <div className="space-y-6 p-6">
       <div className="flex flex-row justify-between items-center">
         <HeadingBlock
@@ -62,7 +64,7 @@ export default function TransitionsPageClient({ masters, transitions }: Props) {
             <option value="" disabled>Selecciona un maestro</option>
             {masters.map((m) => (
               <option key={m.id} value={m.id}>
-                {m.name} — ${m.balance}
+                {m.name} — Saldo: {m.balance}
               </option>
             ))}
           </select>
@@ -79,11 +81,13 @@ export default function TransitionsPageClient({ masters, transitions }: Props) {
       </div>
 
       {selectedMaster && (
-        <div className="text-sm text-gray-700">
-          <strong>Saldo:</strong> ${selectedMaster.balance}
+        <div>
+          <div className="text-sm text-gray-700">
+            <strong>Saldo:</strong> {selectedMaster.balance}
+          </div>
+          <TransitionsGraph transitions={filteredTransitions} saldo={selectedMaster.balance} />
         </div>
       )}
-
       <TransitionsTable transitions={filteredTransitions} />
     </div>
   )

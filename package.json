@@ -15,6 +15,7 @@
     "@stitches/react": "^1.2.8",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@tailwindcss/postcss": "^4.1.10",
+    "@types/recharts": "^1.8.29",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
     "lucide-react": "^0.525.0",
@@ -24,6 +25,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.59.0",
+    "recharts": "^3.1.0",
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {
