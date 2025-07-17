@@ -42,7 +42,12 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                         {transiciones.type}
                       </span>
                     </td>
-                    <td className="table-cell">{transiciones.quantity}</td>
+                    <td className="table-cell">
+                      <span className="px-2 py-1 rounded text-sm font-medium">
+                        {transiciones.type === 'Entrada' ? '+' : '-'}
+                        {transiciones.quantity}
+                      </span>
+                    </td>
                     <td className="table-cell">{transiciones.name}</td>
                   </tr>
                 ))}

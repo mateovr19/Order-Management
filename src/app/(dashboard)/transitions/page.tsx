@@ -1,4 +1,3 @@
-// 📄 /app/(dashboard)/transacciones/page.tsx
 import { prisma } from '@/libs/prisma'
 import TransitionsPageClient from './TransitionsPageClient'
 
