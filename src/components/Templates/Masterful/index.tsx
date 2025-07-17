@@ -4,9 +4,10 @@ import Dialog from '@/components/molecules/Dialog/index'
 import { Button } from '@radix-ui/themes';
 
 export default function Masters() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const handleOpenDialog = () => setDialogOpen(true);
-  const handleCloseDialog = () => setDialogOpen(false);
+  
+ const [dialogOpen, setDialogOpen] = useState(false);
+
+ const toggleDialog = () => setDialogOpen(prev => !prev);
 
   return (
     <>
@@ -17,12 +18,12 @@ export default function Masters() {
         </div>
         <div className="flex items-center space-x-4">
           {/* Botón para abrir el modal */}
-          <Button onClick={handleOpenDialog} mt="4" color='yellow' size="3" style={{ cursor: 'pointer' }}>
+          <Button onClick={toggleDialog} mt="4" color='yellow' size="3" style={{ cursor: 'pointer' }}>
             Agregar Maestro
           </Button>
         </div>
       </div>
-      <Dialog open={dialogOpen} onClose={handleCloseDialog}/>
+      <Dialog open={dialogOpen} onClose={toggleDialog}/>
     </>
   );
 }
