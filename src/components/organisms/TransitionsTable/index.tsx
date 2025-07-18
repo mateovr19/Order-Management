@@ -32,7 +32,7 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
         Historial de Transacciones
       </h3>
         {transitions.length > 0 ? (
-          <div className="max-h-90 overflow-y-auto">
+          <div className="max-h-96 overflow-y-auto">
             <table className="table-base">
               <thead>
                 <tr >

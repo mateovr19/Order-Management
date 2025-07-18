@@ -4,6 +4,7 @@ import { Theme } from "@radix-ui/themes";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import Providers from "./providers"; 
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <Theme>
           <Providers>
             {children}
+            <Toaster position="top-center" reverseOrder={false} />
           </Providers>
         </Theme>
       </body>

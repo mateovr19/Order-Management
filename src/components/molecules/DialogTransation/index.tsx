@@ -5,6 +5,7 @@ import { TextField, Button, RadioGroup } from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 interface MovementDialogProps {
   open: boolean;
@@ -27,11 +28,13 @@ export default function MovementDialog({ open, onClose, masterId, productName}: 
     setLoading(true);
     try {
       const res = await axios.post('/api/auth/transation', { ...data, productName, masterId });
+      toast.success('Movimiento registrado con éxito');
       console.log(res.data);
       setLoading(false);
       onClose();
       router.refresh();
     } catch (error) {
+      toast.error('Error al registrar el movimiento');
       console.error('Error al registrar el movimiento:', error);
       setLoading(false);
     }

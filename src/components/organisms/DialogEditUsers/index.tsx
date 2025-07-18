@@ -5,6 +5,7 @@ import { TextField, Button, RadioGroup } from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 interface UserDialogProps {
   open: boolean;
@@ -42,10 +43,12 @@ export default function UserDialog({
     setLoading(true);
     try {
       await axios.delete(`${url}/${id}`);
+      toast.success('Usuario eliminado con éxito');
       setLoading(false);
       onClose();
       router.refresh();
     } catch (error) {
+      toast.error('Error al eliminar el usuario');
       console.error('Error al eliminar el usuario:', error);
       setLoading(false);
     }
@@ -65,10 +68,12 @@ export default function UserDialog({
         data: payload,
       });
 
+      toast.success('Usuario guardado con éxito');
       setLoading(false);
       onClose();
       router.refresh();
     } catch (error) {
+      toast.error('Error al guardar el usuario');
       console.error('Error al guardar el usuario:', error);
       setLoading(false);
     }

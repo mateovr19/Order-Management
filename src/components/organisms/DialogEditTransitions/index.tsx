@@ -4,6 +4,7 @@ import { TextField, Button, RadioGroup} from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 interface DialogProps {
   open: boolean;
@@ -36,10 +37,12 @@ export default function TransactionDialog({
     setLoading(true);
     try {
       await axios.delete(`${url}/${id}`);
+      toast.success('Transacción eliminada con éxito');
       setLoading(false);
       onClose();
       router.refresh();
     } catch (error) {
+      toast.error('Error al eliminar la transacción');
       console.error('Error al eliminar la transacción:', error);
       setLoading(false);
     }
@@ -53,11 +56,13 @@ export default function TransactionDialog({
         url: `${url}${id ? `/${id}` : ''}`,
         data,
       });
+      toast.success('Transacción guardada con éxito');
       console.log(res);
       setLoading(false);
       onClose();
       router.refresh();
     } catch (error) {
+      toast.error('Error al guardar la transacción');
       console.error('Error al enviar la transacción:', error);
       setLoading(false);
     }

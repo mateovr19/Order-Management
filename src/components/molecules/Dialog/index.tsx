@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { TextField, Button } from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 interface DialogProps {
   open: boolean;
   onClose: () => void;
@@ -27,10 +28,12 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
     setLoading(true);
     try {
       await axios.delete(`${url}/${id}`);
+      toast.success('Maestro eliminado con éxito');
       setLoading(false);
       onClose();
       window.location.href = `${window.location.origin}/masterful`;
     } catch (error) {
+      toast.error('Error al eliminar el maestro');
       console.error('Error al eliminar el maestro:', error);
       setLoading(false);
     }
@@ -41,11 +44,13 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
     setLoading(true);
     try {
       const res = await axios({ method, url: `${url}${id ? `/${id}` : ''}`, data});
+      toast.success('Maestro guardado con éxito');
       console.log(res);
       setLoading(false);
       onClose();
       window.location.href = `${window.location.origin}/masterful`;
     } catch (error) {
+      toast.error('Error al crear el maestro');
       console.error('Error al crear el maestro:', error);
       setLoading(false);
     }

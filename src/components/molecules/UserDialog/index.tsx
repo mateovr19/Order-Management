@@ -5,6 +5,7 @@ import { TextField, Button, Select } from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 interface CreateUserDialogProps {
   open: boolean;
@@ -28,11 +29,13 @@ export default function CreateUserDialog({ open, onClose }: CreateUserDialogProp
     setLoading(true);
     try {
       await axios.post('/api/auth/register', data);
+      toast.success('Usuario creado con éxito');
       setLoading(false);
       reset();
       onClose();
       router.refresh();
     } catch (error) {
+      toast.error('Error al crear el usuario');
       console.error('Error al crear el usuario:', error);
       setLoading(false);
     }
