@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Button } from '@radix-ui/themes';
+import Dialog from '@/components/organisms/DialogEditUsers/index';
 
+
+type Role = 'ADMIN' | 'USER';
 
 interface User {
   id: number;
   name: string;
   email: string;
-  role: string;
+  role: Role;
   createdDate: string;
 }
 
@@ -15,7 +19,15 @@ interface UsersTableProps {
 
 
 const Index = ({ users }: UsersTableProps) => {
-
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const openEditDialog = (user: User) => {
+    setSelectedUser(user); // Establecer el maestro seleccionado
+    setIsDialogOpen(true); // Abrir el modal
+  };
+  const closeDialog = () => {
+    setIsDialogOpen(false); // Cerrar el modal
+  };
   return (
 
     <div className='card flex flex-col gap-5 '>
@@ -38,17 +50,22 @@ const Index = ({ users }: UsersTableProps) => {
               </thead>
               <tbody >
 
-                {users.map((user, index) => (
+                {users.map((user) => (
 
                   <tr className="border-b table-row" key={user.id}>
                     <td className="table-cell">{user.name}</td>
                     <td className="table-cell">{user.email}</td>
                     <td className="table-cell table-cell-role-admin">{user.role}</td>
-                    <td className="table-cell table-cell-muted">{user.createdDate}</td>
-                    <td className="table-cell">
-
-                      {index > 0 && ( <button className="table-action-button">Editar</button>) }
-                    </td>
+                    <td className="table-cell table-cell-muted">{new Date(user.createdDate).toLocaleDateString()}</td>
+                    <Button
+                      onClick={() => openEditDialog(user)}
+                      color="yellow"
+                      size="2"
+                      style={{ cursor: 'pointer' }}
+                      className="!px-4 !py-3"
+                    >
+                      Editar
+                    </Button>
                   </tr>
 
                 ))}
@@ -63,6 +80,20 @@ const Index = ({ users }: UsersTableProps) => {
           <p className="text-gray-500">No hay usuarios registrados.</p>
         )
       }
+{selectedUser && (
+  <Dialog
+    open={isDialogOpen}
+    onClose={closeDialog}
+    url="/api/auth/register" 
+    method="PUT"
+    initialValues={{
+      name: selectedUser.name,
+      email: selectedUser.email,
+      role: selectedUser.role,
+    }}
+    id={selectedUser.id}
+  />
+)}
 
     </div>
 

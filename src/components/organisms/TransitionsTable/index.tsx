@@ -1,5 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '@radix-ui/themes';
+import Dialog from '@/components/organisms/DialogEditTransitions/index';
 
 interface Transition {
   id: number;
@@ -14,6 +16,15 @@ interface TransitionTableProps {
 }
 
 export default function TransitionTable({ transitions }: TransitionTableProps) {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedTransition, setSelectedTransition] = useState<Transition | null>(null);
+  const openEditDialog = (transition: Transition) => {
+    setSelectedTransition(transition); // Establecer el maestro seleccionado
+    setIsDialogOpen(true); // Abrir el modal
+  };
+  const closeDialog = () => {
+    setIsDialogOpen(false); // Cerrar el modal
+  };
   return (
     <div className="card flex flex-col gap-5">
 
@@ -30,6 +41,7 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                   <th  className="table-header-cell">Tipo</th>
                   <th  className="table-header-cell">Cantidad</th>
                   <th  className="table-header-cell">Name</th>
+                  <td className="table-cell px-4 py-3 align-middle"></td>
                 </tr>
               </thead>
               <tbody>
@@ -49,6 +61,17 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                       </span>
                     </td>
                     <td className="table-cell">{transiciones.name}</td>
+                    <td className="table-cell px-4 py-3 align-middle">
+                    <Button
+                      onClick={() => openEditDialog(transiciones)}
+                      color="yellow"
+                      size="2"
+                      style={{ cursor: 'pointer' }}
+                      className="!px-4 !py-3"
+                    >
+                      Editar
+                    </Button>
+                  </td>
                   </tr>
                 ))}
               </tbody>
@@ -57,6 +80,20 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
         ) : (
           <p className="text-gray-500">No hay transiciones registradas.</p>
         )}
+        {selectedTransition && (
+                <Dialog
+                  open={isDialogOpen}
+                  onClose={closeDialog}
+                  url="/api/auth/transation"
+                  method="PUT"
+                  initialValues={{
+                    type: selectedTransition.type,
+                    quantity: selectedTransition.quantity,
+                    date: selectedTransition.date,
+                  }}
+                  id={selectedTransition.id}
+                />
+              )}
       </div>
   );
 }

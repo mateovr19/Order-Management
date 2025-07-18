@@ -5,12 +5,13 @@ import UsersTable from '@/components/organisms/UsersTable'
 import { Button } from '@radix-ui/themes'
 import { Users } from 'lucide-react'
 import React, { useState } from 'react'
+import { Role } from '@prisma/client'
 
 interface User {
   id: number;
   name: string;
   email: string;
-  role: string;
+  role: Role;
   createdDate: string;
 }
 

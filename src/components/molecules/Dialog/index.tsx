@@ -53,7 +53,6 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
     }
   });
 
-  // Si el modal no está abierto, no renderizamos nada
   if (!open) return null;
 
   return (
