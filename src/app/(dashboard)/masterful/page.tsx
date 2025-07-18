@@ -2,6 +2,7 @@ import React from 'react'
 import Masters from '@/components/Templates/Masterful/index'
 import MasterTable from '@/components/organisms/MasterTable';
 import { prisma } from '@/libs/prisma';
+export const dynamic = 'force-dynamic';
 
 async function loadMasters() {
   return await prisma.master.findMany({

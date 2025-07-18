@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { prisma } from '@/libs/prisma';
 import UserPageClient from './UserPageClient';
 
