@@ -4,7 +4,11 @@ import { prisma } from '@/libs/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../../../../libs/auth0ptions';
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+interface Params {
+  id: string;
+}
+
+export async function PUT(request: NextRequest, { params }: { params: Params }) {
     const { id } = params;
     const data = await request.json();
     const session = await getServerSession(authOptions);
@@ -26,7 +30,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     });
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Params }) {
   const { id } = params;
   const deletionMaster = await prisma.master.delete({
     where: { id: parseInt(id) },
