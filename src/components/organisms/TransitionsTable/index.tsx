@@ -47,7 +47,7 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                   <th  className="table-header-cell">Tipo</th>
                   <th  className="table-header-cell">Cantidad</th>
                   <th  className="table-header-cell">Name</th>
-                  {user?.role === 'ADMIN' && (
+                  {role === 'ADMIN' && (
                     <td className="table-cell px-4 py-3 align-middle text-md font-semibold">Acciones</td>
                   )}
                 </tr>
@@ -69,7 +69,7 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                       </span>
                     </td>
                     <td className="table-cell">{transiciones.name}</td>
-                    {user?.role === 'ADMIN' && (
+                    {role === 'ADMIN' && (
                       <td className="table-cell px-4 py-3 align-middle">
                         <Button
                           onClick={() => openEditDialog(transiciones)}
