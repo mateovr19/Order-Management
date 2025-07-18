@@ -19,7 +19,6 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
   const { control, handleSubmit, reset } = useForm({
     defaultValues: initialValues,
   });
-  const router = useRouter();
 
   useEffect(() => {
     reset(initialValues);
@@ -31,7 +30,7 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
       await axios.delete(`${url}/${id}`);
       setLoading(false);
       onClose();
-      router.push(window.location.pathname);
+      window.location.href = `${window.location.origin}/masterful`;
     } catch (error) {
       console.error('Error al eliminar el maestro:', error);
       setLoading(false);
@@ -46,7 +45,7 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
       console.log(res);
       setLoading(false);
       onClose();
-      router.push(window.location.pathname);
+      window.location.href = `${window.location.origin}/masterful`;
     } catch (error) {
       console.error('Error al crear el maestro:', error);
       setLoading(false);
