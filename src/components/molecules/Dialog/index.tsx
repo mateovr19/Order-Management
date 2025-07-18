@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { TextField, Button } from '@radix-ui/themes';
+import { TextField, Button, Text } from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
@@ -16,7 +16,7 @@ interface DialogProps {
 
 export default function Dialog({ open, onClose, url, method, initialValues = { name: '', balance: 0 }, id }: DialogProps) {
   const [loading, setLoading] = useState(false);
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: initialValues,
   });
 
@@ -65,35 +65,53 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
 
         <div className="space-y-4">
             <form onSubmit={onSubmit} className="space-y-4">
-                <label htmlFor="name" className="block text-sm font-medium">Nombre del Maestro</label>
-                <Controller
-                    name='name'
-                    control={control}
-                    render={({field}) => {
-                        return (
-                        <TextField.Root 
-                            id='name'
-                            type='text' 
-                            placeholder='Ingresa el nombre del maestro'
-                            { ... field }
-                        />
-                        );
-                    }}
+              <label htmlFor="name" className="block text-sm font-medium">Nombre del Maestro</label>
+              <Controller
+                  name='name'
+                  control={control}
+                  rules= {{
+                    required: {
+                      message: 'El nombre del maestro es requerido',
+                      value: true,
+                    }
+                  }}
+                  render={({field}) => (
+                    <div>
+                      <TextField.Root 
+                        id='name'
+                        type='text' 
+                        placeholder='Ingresa el nombre del maestro'
+                        { ... field }
+                      />
+                      { errors.name && <Text color='red' className='text-xs'>{errors.name.message}</Text>}
+                    </div>
+                  )}
                 />
                 <label htmlFor="balance" className="block text-sm font-medium">Saldo Inicial</label>
                 <Controller
-                    name='balance'
-                    control={control}
-                    render={({field}) => {
-                        return (
-                        <TextField.Root 
-                            id='balance'
-                            type='number' 
-                            placeholder='Ingresa el saldo inicial'
-                            { ... field }
-                        />
-                        );
-                    }}
+                  name='balance'
+                  control={control}
+                  rules={{
+                    required: {
+                      message: 'La cantidad es obligatoria',
+                      value: true,
+                    },
+                    min: {
+                      message: 'La cantidad debe ser mayor a 0',
+                      value: 1,
+                    }
+                  }}
+                  render={({field}) => (
+                    <div>
+                      <TextField.Root 
+                        id='balance'
+                        type='number' 
+                        placeholder='Ingresa el saldo inicial'
+                        { ... field }
+                      />
+                      { errors.balance && <Text color='red' className='text-xs'>{errors.balance.message}</Text>}
+                    </div>
+                  )}
                 />
 
                 <div className="flex justify-end space-x-2 mt-4 gap-2">

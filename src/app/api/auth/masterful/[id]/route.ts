@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/libs/prisma';
 
-
-// PUT: Actualiza un maestro
 export async function PUT(request: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
   const data = await request.json();
@@ -17,13 +15,10 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
 
   return NextResponse.json(updatedMaster, {
     status: 200,
-    headers: {
-      'Cache-Control': 'no-store', // Deshabilita el almacenamiento en caché
-    }, // Código de estado correcto para PUT
+    
   });
 }
 
-// DELETE: Elimina un maestro
 export async function DELETE(request: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
 
@@ -33,8 +28,5 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
 
   return NextResponse.json(deletedMaster, {
     status: 200,
-    headers: {
-      'Cache-Control': 'no-store', // Deshabilita el almacenamiento en caché
-    }, // Código de estado correcto para DELETE
   });
 }

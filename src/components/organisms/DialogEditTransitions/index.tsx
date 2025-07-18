@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, RadioGroup } from '@radix-ui/themes';
+import { TextField, Button, RadioGroup, Text } from '@radix-ui/themes';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -84,20 +84,19 @@ export default function TransactionDialog({
           <Controller
             name="type"
             control={control}
-            rules={{ required: 'El tipo de transacción es obligatorio' }}
+            rules= {{
+              required: {
+                message: 'El tipo de transacción es obligatorio',
+                value: true,
+              }
+            }}
             render={({ field }) => (
               <div>
-                <RadioGroup.Root
-                  defaultValue={field.value}
-                  onValueChange={field.onChange}
-                  className="flex gap-4"
-                >
+                <RadioGroup.Root value={field.value} onValueChange={field.onChange}>
                   <RadioGroup.Item value="entrada">Entrada</RadioGroup.Item>
                   <RadioGroup.Item value="salida">Salida</RadioGroup.Item>
                 </RadioGroup.Root>
-                {errors.type && (
-                  <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>
-                )}
+                { errors.type && <Text color='red' className='text-xs'>{errors.type.message}</Text>}
               </div>
             )}
           />
@@ -110,8 +109,14 @@ export default function TransactionDialog({
             name="quantity"
             control={control}
             rules={{
-              required: 'La cantidad es obligatoria',
-              min: { value: 1, message: 'La cantidad debe ser mayor a 0' },
+              required: {
+                message: 'La cantidad es obligatoria',
+                value: true,
+              },
+              min: {
+                message: 'La cantidad debe ser mayor a 0',
+                value: 1,
+              }
             }}
             render={({ field }) => (
               <div>
@@ -122,9 +127,7 @@ export default function TransactionDialog({
                   {...field}
                   className={errors.quantity ? 'border-red-500' : ''}
                 />
-                {errors.quantity && (
-                  <p className="text-red-500 text-sm mt-1">{errors.quantity.message}</p>
-                )}
+                { errors.quantity && <Text color='red' className='text-xs'>{errors.quantity.message}</Text>}
               </div>
             )}
           />
@@ -136,7 +139,12 @@ export default function TransactionDialog({
           <Controller
             name="date"
             control={control}
-            rules={{ required: 'La fecha es obligatoria' }}
+            rules= {{
+              required: {
+                message: 'La fecha es obligatoria',
+                value: true,
+              }
+            }}
             render={({ field }) => (
               <div>
                 <TextField.Root
@@ -146,9 +154,7 @@ export default function TransactionDialog({
                   {...field}
                   className={errors.date ? 'border-red-500' : ''}
                 />
-                {errors.date && (
-                  <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
-                )}
+                { errors.date && <Text color='red' className='text-xs'>{errors.date.message}</Text>}
               </div>
             )}
           />

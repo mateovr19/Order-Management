@@ -87,9 +87,9 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                   url="/api/auth/transation"
                   method="PUT"
                   initialValues={{
-                    type: selectedTransition.type,
+                    type: "",
                     quantity: selectedTransition.quantity,
-                    date: selectedTransition.date,
+                    date: "",
                   }}
                   id={selectedTransition.id}
                 />
