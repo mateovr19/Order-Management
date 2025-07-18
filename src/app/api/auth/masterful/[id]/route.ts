@@ -16,7 +16,10 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
   });
 
   return NextResponse.json(updatedMaster, {
-    status: 200, // Código de estado correcto para PUT
+    status: 200,
+    headers: {
+      'Cache-Control': 'no-store', // Deshabilita el almacenamiento en caché
+    }, // Código de estado correcto para PUT
   });
 }
 
@@ -29,6 +32,9 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
   });
 
   return NextResponse.json(deletedMaster, {
-    status: 200, // Código de estado correcto para DELETE
+    status: 200,
+    headers: {
+      'Cache-Control': 'no-store', // Deshabilita el almacenamiento en caché
+    }, // Código de estado correcto para DELETE
   });
 }
