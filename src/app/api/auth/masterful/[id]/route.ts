@@ -3,8 +3,8 @@ import { prisma } from '@/libs/prisma';
 
 
 // PUT: Actualiza un maestro
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
-  const { id } = await params;
+export async function PUT(request: Request, context: { params: { id: string } }) {
+  const { id } = context.params;
   const data = await request.json();
 
   const updatedMaster = await prisma.master.update({
@@ -21,8 +21,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 }
 
 // DELETE: Elimina un maestro
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-  const { id } = await params;
+export async function DELETE(request: Request, context: { params: { id: string } }) {
+  const { id } = context.params;
 
   const deletedMaster = await prisma.master.delete({
     where: { id: parseInt(id) },
