@@ -56,3 +56,49 @@ export async function POST(request: Request) {
     );
   }
 }
+
+// PUT: Actualiza un maestro (usando body, no ruta dinámica)
+export async function PUT(request: Request) {
+  try {
+    const data = await request.json();
+    const { id, name, balance } = data;
+
+    if (!id || !name || balance === undefined) {
+      return NextResponse.json({ error: 'Datos incompletos' }, { status: 400 });
+    }
+
+    const updatedMaster = await prisma.master.update({
+      where: { id: parseInt(id) },
+      data: {
+        name,
+        balance: parseInt(balance),
+      },
+    });
+
+    return NextResponse.json(updatedMaster, { status: 200 });
+  } catch (error) {
+    console.error('[PUT /api/auth/transation]', error);
+    return NextResponse.json({ error: 'Error al actualizar' }, { status: 500 });
+  }
+}
+
+// DELETE: Elimina un maestro (usando body, no ruta dinámica)
+export async function DELETE(request: Request) {
+  try {
+    const data = await request.json();
+    const { id } = data;
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID no proporcionado' }, { status: 400 });
+    }
+
+    const deletedMaster = await prisma.master.delete({
+      where: { id: parseInt(id) },
+    });
+
+    return NextResponse.json(deletedMaster, { status: 200 });
+  } catch (error) {
+    console.error('[DELETE /api/auth/transation]', error);
+    return NextResponse.json({ error: 'Error al eliminar' }, { status: 500 });
+  }
+}

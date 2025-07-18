@@ -1,38 +1,111 @@
-import { Button } from '@radix-ui/themes';
-import React from 'react'
+'use client';
 
+import React, { useState } from 'react';
+import { TextField, Button, Select } from '@radix-ui/themes';
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-interface DialogProps {
-    open: boolean;
-    onClose: () => void;
+interface CreateUserDialogProps {
+  open: boolean;
+  onClose: () => void;
 }
 
+export default function CreateUserDialog({ open, onClose }: CreateUserDialogProps) {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-const index = ({ open, onClose }: DialogProps) => {
-    return !open ? null : (
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      role: 'USER', // valor por defecto
+    },
+  });
 
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-xl font-semibold mb-4">Crear Nuevo Maestro</h2>
+  const onSubmit = handleSubmit(async (data) => {
+    setLoading(true);
+    try {
+      await axios.post('/api/auth/register', data);
+      setLoading(false);
+      reset();
+      onClose();
+      router.refresh();
+    } catch (error) {
+      console.error('Error al crear el usuario:', error);
+      setLoading(false);
+    }
+  });
 
+  if (!open) return null;
 
-                <h1>
-                    hola mundo
-                </h1>
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-xl font-semibold mb-4">Crear Nuevo Usuario</h2>
 
-                <div className="flex justify-end space-x-2 mt-4 gap-2">
-                    <Button type='submit'  onClick={onClose} mt="4" color='red' style={{ cursor: 'pointer' }}>
-                        Cancelar
-                    </Button>
-                </div>
-            </div>
-        </div>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium">Nombre</label>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <TextField.Root id="name" placeholder="Nombre del usuario" {...field} />
+              )}
+            />
+          </div>
 
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium">Email</label>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <TextField.Root id="email" type="email" placeholder="correo@ejemplo.com" {...field} />
+              )}
+            />
+          </div>
 
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium">Contraseña</label>
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <TextField.Root id="password" type="password" placeholder="********" {...field} />
+              )}
+            />
+          </div>
 
-    )
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium">Rol</label>
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <Select.Root onValueChange={field.onChange} defaultValue="USER">
+                  <Select.Trigger />
+                  <Select.Content>
+                    <Select.Item value="USER">Usuario</Select.Item>
+                    <Select.Item value="ADMIN">Administrador</Select.Item>
+                  </Select.Content>
+                </Select.Root>
+              )}
+            />
+          </div>
+
+          <div className="flex justify-end gap-2 pt-4">
+            <Button type="button" color="gray" onClick={onClose} disabled={loading}>
+              Cancelar
+            </Button>
+            <Button type="submit" color="green" disabled={loading}>
+              {loading ? 'Creando...' : 'Crear Usuario'}
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
-
-
-
-export default index
