@@ -22,7 +22,13 @@ export default function Masters() {
           </Button>
         </div>
       </div>
-      <Dialog open={dialogOpen} onClose={handleCloseDialog}/>
+      <Dialog 
+        open={dialogOpen} 
+        onClose={handleCloseDialog}
+        url="/api/auth/masterful"
+        method="POST"
+        initialValues={{ name: '', balance: 0 }}
+      />
     </>
   );
 }

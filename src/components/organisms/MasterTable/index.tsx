@@ -1,5 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '@radix-ui/themes';
+import Dialog from '@/components/molecules/Dialog/index';
 
 interface Master {
   id: number;
@@ -14,6 +16,18 @@ interface MasterTableProps {
 }
 
 export default function MasterTable({ masters }: MasterTableProps) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedMaster, setSelectedMaster] = useState<Master | null>(null);
+
+  const openEditDialog = (master: Master) => {
+    setSelectedMaster(master); // Establecer el maestro seleccionado
+    setIsDialogOpen(true); // Abrir el modal
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false); // Cerrar el modal
+  };
+
   return (
     <div className="card flex flex-col gap-5 h-full min-h-0">
       <h3 className="text-xl font-semibold text-gray-800">
@@ -30,6 +44,7 @@ export default function MasterTable({ masters }: MasterTableProps) {
                 <th className="table-header-cell !px-7 !py-3">Saldo</th>
                 <th className="table-header-cell !px-7 !py-3">Creador</th>
                 <th className="table-header-cell !px-7 !py-3">Fecha de Creación</th>
+                <th className="table-header-cell !px-7 !py-3">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -42,6 +57,17 @@ export default function MasterTable({ masters }: MasterTableProps) {
                   <td className="table-cell px-4 py-3 align-middle">
                     {new Date(master.createdAt).toLocaleDateString()}
                   </td>
+                  <td className="table-cell px-4 py-3 align-middle">
+                    <Button
+                      onClick={() => openEditDialog(master)}
+                      color="yellow"
+                      size="2"
+                      style={{ cursor: 'pointer' }}
+                      className="!px-4 !py-3"
+                    >
+                      Editar
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -49,6 +75,19 @@ export default function MasterTable({ masters }: MasterTableProps) {
         </div>
       ) : (
         <p className="text-gray-500">No hay maestros registrados.</p>
+      )}
+      {selectedMaster && (
+        <Dialog
+          open={isDialogOpen}
+          onClose={closeDialog}
+          url="/api/auth/masterful"
+          method="PUT"
+          initialValues={{
+            name: selectedMaster.name,
+            balance: selectedMaster.balance,
+          }}
+          id={selectedMaster.id}
+        />
       )}
     </div>
   );

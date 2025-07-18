@@ -60,7 +60,7 @@ const Index = ({ users }: UsersTableProps) => {
         )
         :
         (
-          <p className="text-gray-500">No hay maestros registrados.</p>
+          <p className="text-gray-500">No hay usuarios registrados.</p>
         )
       }
 
