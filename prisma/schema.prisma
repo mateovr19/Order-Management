@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "/app/generated/prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String @unique
+  password  String
+  role      Role @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdMasters Master[]      @relation("CreatedBy")
+  transactions   Transaction[] @relation("ResponsibleFor")
+}
+
+model Master {
+  id        Int     @id @default(autoincrement())
+  name      String
+  balance   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  creatorId    Int
+  creator      User        @relation("CreatedBy", fields: [creatorId], references: [id])
+  transactions Transaction[]
+
+  @@map("masters")
+}
+
+model Transaction {
+  id       Int     @id @default(autoincrement())
+  date     DateTime        @default(now())
+  quantity Int
+  type     typeTransaction
+
+  masterId Int
+  master   Master @relation(fields: [masterId], references: [id], onDelete: Cascade)
+
+  responsibleId Int
+  responsible   User @relation("ResponsibleFor", fields: [responsibleId], references: [id])
+
+  @@map("transactions")
+}
+
+enum typeTransaction {
+  Entrada
+  Salida
+}

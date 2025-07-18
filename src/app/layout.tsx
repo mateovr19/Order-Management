@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Theme } from "@radix-ui/themes";
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
+import Providers from "./providers"; 
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <Theme>
+          <Providers>
+            {children}
+            <Toaster position="top-center" reverseOrder={false} />
+          </Providers>
+        </Theme>
       </body>
     </html>
   );
 }
+
