@@ -135,7 +135,7 @@ export default function UserDialog({
             )}
           />
 
-          <div className="flex justify-end space-x-2 mt-4">
+          <div className="flex justify-end space-x-2 mt-4 gap-2">
             <Button type="button" disabled={loading} onClick={onClose} color="red">
               Cancelar
             </Button>

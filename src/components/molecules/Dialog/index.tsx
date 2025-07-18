@@ -93,7 +93,7 @@ export default function Dialog({ open, onClose, url, method, initialValues = { n
                   control={control}
                   rules={{
                     required: {
-                      message: 'La cantidad es obligatoria',
+                      message: 'El saldo es obligatorio',
                       value: true,
                     },
                     min: {

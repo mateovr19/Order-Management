@@ -19,17 +19,17 @@ interface UsersTableProps {
 
 
 const Index = ({ users }: UsersTableProps) => {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
   const openEditDialog = (user: User) => {
-    setSelectedUser(user); // Establecer el maestro seleccionado
-    setIsDialogOpen(true); // Abrir el modal
+    setSelectedUser(user);
+    setIsDialogOpen(true);
   };
   const closeDialog = () => {
-    setIsDialogOpen(false); // Cerrar el modal
+    setIsDialogOpen(false);
   };
   return (
-
     <div className='card flex flex-col gap-5 '>
       <h3>
         Lista de Usuarios
@@ -53,10 +53,11 @@ const Index = ({ users }: UsersTableProps) => {
                 {users.map((user) => (
 
                   <tr className="border-b table-row" key={user.id}>
-                    <td className="table-cell">{user.name}</td>
-                    <td className="table-cell">{user.email}</td>
-                    <td className="table-cell table-cell-role-admin">{user.role}</td>
-                    <td className="table-cell table-cell-muted">{new Date(user.createdDate).toLocaleDateString()}</td>
+                  <td className="table-cell">{user.name}</td>
+                  <td className="table-cell">{user.email}</td>
+                  <td className="table-cell table-cell-role-admin">{user.role}</td>
+                  <td className="table-cell table-cell-muted">{new Date(user.createdDate).toLocaleDateString()}</td>
+                  <td className="table-cell">
                     <Button
                       onClick={() => openEditDialog(user)}
                       color="yellow"
@@ -66,8 +67,8 @@ const Index = ({ users }: UsersTableProps) => {
                     >
                       Editar
                     </Button>
-                  </tr>
-
+                  </td>
+                </tr>
                 ))}
 
               </tbody>
@@ -80,23 +81,21 @@ const Index = ({ users }: UsersTableProps) => {
           <p className="text-gray-500">No hay usuarios registrados.</p>
         )
       }
-{selectedUser && (
-  <Dialog
-    open={isDialogOpen}
-    onClose={closeDialog}
-    url="/api/auth/register" 
-    method="PUT"
-    initialValues={{
-      name: selectedUser.name,
-      email: selectedUser.email,
-      role: selectedUser.role,
-    }}
-    id={selectedUser.id}
-  />
-)}
-
+      {selectedUser && (
+        <Dialog
+          open={isDialogOpen}
+          onClose={closeDialog}
+          url="/api/auth/register" 
+          method="PUT"
+          initialValues={{
+            name: selectedUser.name,
+            email: selectedUser.email,
+            role: selectedUser.role,
+          }}
+          id={selectedUser.id}
+        />
+      )}
     </div>
-
   )
 }
 

@@ -2,11 +2,14 @@
 import React, { useState } from 'react'
 import Dialog from '@/components/molecules/Dialog/index'
 import { Button } from '@radix-ui/themes';
+import { useSession } from 'next-auth/react';
 
 export default function Masters() {
-  
- const [dialogOpen, setDialogOpen] = useState(false);
- const toggleDialog = () => setDialogOpen(prev => !prev);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const toggleDialog = () => setDialogOpen(prev => !prev);
+  const { data: session } = useSession();
+  const user = session?.user;
+  const role = user?.role;
 
   return (
     <>
@@ -16,10 +19,11 @@ export default function Masters() {
           <p className="text-brand-dark/60">Gestiona el catálogo de productos</p>
         </div>
         <div className="flex items-center space-x-4">
-          {/* Botón para abrir el modal */}
-          <Button onClick={toggleDialog} mt="4" color='yellow' size="3" style={{ cursor: 'pointer' }}>
-            Agregar Maestro
-          </Button>
+          {role === 'ADMIN' && (
+            <Button onClick={toggleDialog} mt="4" color='yellow' size="3" style={{ cursor: 'pointer' }}>
+              Agregar Maestro
+            </Button>
+          )}
         </div>
       </div>
       <Dialog 

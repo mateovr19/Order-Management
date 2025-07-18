@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@radix-ui/themes';
 import Dialog from '@/components/organisms/DialogEditTransitions/index';
+import { useSession } from 'next-auth/react';
 
 interface Transition {
   id: number;
@@ -16,8 +17,13 @@ interface TransitionTableProps {
 }
 
 export default function TransitionTable({ transitions }: TransitionTableProps) {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [selectedTransition, setSelectedTransition] = useState<Transition | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedTransition, setSelectedTransition] = useState<Transition | null>(null);
+
+  const { data: session } = useSession();
+  const user = session?.user;
+  const role = user?.role;
+
   const openEditDialog = (transition: Transition) => {
     setSelectedTransition(transition); // Establecer el maestro seleccionado
     setIsDialogOpen(true); // Abrir el modal
@@ -41,7 +47,9 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                   <th  className="table-header-cell">Tipo</th>
                   <th  className="table-header-cell">Cantidad</th>
                   <th  className="table-header-cell">Name</th>
-                  <td className="table-cell px-4 py-3 align-middle"></td>
+                  {user?.role === 'ADMIN' && (
+                    <td className="table-cell px-4 py-3 align-middle text-md font-semibold">Acciones</td>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -61,17 +69,19 @@ export default function TransitionTable({ transitions }: TransitionTableProps) {
                       </span>
                     </td>
                     <td className="table-cell">{transiciones.name}</td>
-                    <td className="table-cell px-4 py-3 align-middle">
-                    <Button
-                      onClick={() => openEditDialog(transiciones)}
-                      color="yellow"
-                      size="2"
-                      style={{ cursor: 'pointer' }}
-                      className="!px-4 !py-3"
-                    >
-                      Editar
-                    </Button>
-                  </td>
+                    {user?.role === 'ADMIN' && (
+                      <td className="table-cell px-4 py-3 align-middle">
+                        <Button
+                          onClick={() => openEditDialog(transiciones)}
+                          color="yellow"
+                          size="2"
+                          style={{ cursor: 'pointer' }}
+                          className="!px-4 !py-3"
+                        >
+                          Editar
+                        </Button>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
