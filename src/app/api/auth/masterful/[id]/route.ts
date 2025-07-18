@@ -5,11 +5,11 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../../../../libs/auth0ptions';
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+    const { id } = params;
     const data = await request.json();
-    const { id } = await params;
     const session = await getServerSession(authOptions);
     const updatedMaster = await prisma.master.update({
-        where: { id: parseInt(id || '') },
+        where: { id: parseInt(id) },
         data: {
             name: data.name,
             balance: parseInt(data.balance),
@@ -27,9 +27,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = await params;
+  const { id } = params;
   const deletionMaster = await prisma.master.delete({
-    where: { id: parseInt(id || '') },
+    where: { id: parseInt(id) },
   });
 
   return NextResponse.json(deletionMaster, {
