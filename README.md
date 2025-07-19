@@ -1,9 +1,20 @@
-# 🍕 Order-Management
+# 🍕 FoodsManager-Order-Management
 
 Aplicación web de administración de inventarios y transacciones en el contexto de un restaurante de comidas rápidas (pizza, hamburguesas, etc.). Permite gestionar movimientos, visualizar gráficos y administrar usuarios con diferentes roles.  
   
 🔗 [Repositorio en GitHub](https://github.com/mateovr19/Order-Management.git)    
-🌐 [Frontend desplegado en Vercel](https://foodsmanager-order-managements.vercel.app)  
+🌐 [Aplicación desplegada](https://foodsmanager-order-managements.vercel.app) 
+
+## Usuarios de prueba
+
+**Usuario rol ADMIN**
+- correo: admin@mail.com
+- contraseña: admin1234
+
+**Usuario rol USER**
+- correo: user@mail.com
+- contraseña: user1234
+
   
 <img width="1768" height="819" alt="image" src="https://github.com/user-attachments/assets/7750bcc8-97a5-4ba4-afdb-7da593c2d3c3" />  
 
@@ -40,7 +51,7 @@ Aplicación web de administración de inventarios y transacciones en el contexto
 | Rol   | Permisos                                                                 |
 |--------|--------------------------------------------------------------------------|
 | `ADMIN` | Acceso total: transacciones, maestros, usuarios                         |
-| `USER`  | Acceso a transacciones y maestros. Sin permisos sobre usuarios o crear maestros |
+| `USER`  | Acceso a transacciones y maestros. Sin permisos sobre usuarios, crear maestros y/o transacciones |
   
 ---  
   
@@ -54,59 +65,48 @@ El backend y frontend están en la misma carpeta, como un monolito bajo Next.js:
   
 1. **Clona el repositorio**    
   
-git clone https://github.com/mateovr19/Order-Management.git  
-
+- git clone https://github.com/mateovr19/Order-Management.git  
+- cd Order-Management
   
-cd Order-Management
+2. **Instala dependencias**  
+- npm install  
+- Crea una base de datos en Prisma
   
-Instala dependencias  
-npm install  
-Crea una base de datos en Supabase  
-  
-Copia la URL y clave de acceso de tu proyecto Supabase.  
-  
-Crea el archivo .env  
+- Crea el archivo .env  
 Incluye al menos variables como:  
 
-NEXTAUTH_URL=http://localhost:3000  
-NEXTAUTH_SECRET= (cualquier codigo hash ó sha256)
+- NEXTAUTH_URL=http://localhost:3000  
+- NEXTAUTH_SECRET= (cualquier codigo hash ó sha256)
+- POSTGRES_URL=""  (Variables obtenidas en la herramienta de despliegue utilizada)
+- PRISMA_DATABASE_URL=""  (Variables obtenidas en la herramienta de despliegue utilizada)
   
-POSTGRES_URL=""  (Variables obtenidas en la herramienta de despliegue utilizada)
-PRISMA_DATABASE_URL=""  (Variables obtenidas en la herramienta de despliegue utilizada)
+3. **Genera e instala el esquema de base de datos con Prisma** 
   
-Genera e instala el esquema de base de datos con Prisma  
+- npx prisma migrate dev --name migracion-inicial  
+- Ejecuta la aplicación localmente -> npm run dev
   
-npx prisma migrate dev --name migracion-inicial  
-Ejecuta la aplicación localmente  
+## 📊 Funcionalidades por página
+
+🔄Transacciones
+
+- Selección de Maestro para ver sus movimientos    
+- Tabla con ID, fecha, cantidad y responsable  
+- Formulario para crear movimiento (entrada o salida)  
+- Gráfica con saldo diario acumulado  
   
+👨‍🏭 Maestros
+
+- Tabla con ID, nombre, saldo, creador  
+- Creación de Maestro, actualización y eliminación (solo ADMIN)  
   
-npm run dev  
-📊 Funcionalidades por página  
-🔄 Transacciones  
-Selección de Maestro para ver sus movimientos  
+👤 Usuarios
+
+- Tabla con ID, email, rol, fecha de creación 
+- Edición de rol y creación de usuarios (solo ADMIN)  
   
-Tabla con ID, fecha, cantidad y responsable  
-  
-Formulario para crear movimiento (entrada o salida)  
-  
-Gráfica con saldo diario acumulado  
-  
-👨‍🏭 Maestros  
-Tabla con ID, nombre, saldo, creador  
-  
-Creación de Maestro (solo ADMIN)  
-  
-👤 Usuarios  
-Tabla con ID, email, rol, fecha de creación  
-  
-Edición de rol (solo ADMIN)  
-  
-  
-✍️ Autores:
+## ✍️ Autores:
+
 - Mateo Velásquez
 - Fredy Hoyos  
 - Douglas Alarcón   
-  
-📸 Capturas de pantalla  
-<img width="1844" height="946" alt="image" src="https://github.com/user-attachments/assets/1c6763c8-1850-450d-b0de-33cae0af4d27" />
 
