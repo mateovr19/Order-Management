@@ -103,9 +103,9 @@ Edición de rol (solo ADMIN)
   
   
 ✍️ Autores:
-Mateo Velásquez
-Fredy Hoyos  
-Douglas Alarcón   
+- Mateo Velásquez
+- Fredy Hoyos  
+- Douglas Alarcón   
   
 📸 Capturas de pantalla  
 <img width="1844" height="946" alt="image" src="https://github.com/user-attachments/assets/1c6763c8-1850-450d-b0de-33cae0af4d27" />
