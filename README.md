@@ -66,15 +66,13 @@ Crea una base de datos en Supabase
 Copia la URL y clave de acceso de tu proyecto Supabase.  
   
 Crea el archivo .env  
-Incluye al menos:  
-  
-env  
+Incluye al menos variables como:  
+
 NEXTAUTH_URL=http://localhost:3000  
-NEXTAUTH_SECRET=secret  
+NEXTAUTH_SECRET= (cualquier codigo hash ó sha256)
   
-POSTGRES_URL="postgres://09bb38e5055a628149947d55923b436677989bc75f811e796bf49085accfb3b4:sk_Zq-QZbIDLSpqRVEm7cK2U@db.prisma.io:5432/?sslmode=require"  
-PRISMA_DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?  api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMDFKWkdNUVNBUjBFOVAzNUNBS1k5TjkxSFYiLCJ0ZW5hbnRfaWQiOiIwOWJiMzhlNTA1NWE2MjgxNDk5NDdkNTU5MjNiNDM2Njc3OTg5YmM3NWY4MTFlNzk2YmY0OTA4NWFjY2ZiM2I0IiwiaW50ZXJuYWxfc2VjcmV0IjoiZTM1ZmVjZDktOGRmNC00ODYyLWE1OWYtODcxZDg3ZDdlYWJjIn0.cRthm21LMjh145zTTMVo0B_Bb7gFHPlTH4611Lz9ME0"  
-DATABASE_URL="postgres://09bb38e5055a628149947d55923b436677989bc75f811e796bf49085accfb3b4:sk_Zq-QZbIDLSpqRVEm7cK2U@db.prisma.io:5432/?sslmode=require"  
+POSTGRES_URL=""  (Variables obtenidas en la herramienta de despliegue utilizada)
+PRISMA_DATABASE_URL=""  (Variables obtenidas en la herramienta de despliegue utilizada)
   
 Genera e instala el esquema de base de datos con Prisma  
   
@@ -104,10 +102,10 @@ Tabla con ID, email, rol, fecha de creación
 Edición de rol (solo ADMIN)  
   
   
-✍️ Autores  
+✍️ Autores:
+Mateo Velásquez
 Fredy Hoyos  
-Douglas Alarcón  
-Mateo Velázquez  
+Douglas Alarcón   
   
 📸 Capturas de pantalla  
 <img width="1844" height="946" alt="image" src="https://github.com/user-attachments/assets/1c6763c8-1850-450d-b0de-33cae0af4d27" />
